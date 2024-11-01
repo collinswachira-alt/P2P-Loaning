@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup</title>
+  <title>Sign Up</title>
   <link rel="stylesheet" href="signup.css">
 </head>
 <body>
   <div class="signup-container">
-    <h2>Signup</h2>
+    <h2>Create Account</h2>
     <form id="signupForm" enctype="multipart/form-data">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
@@ -16,11 +16,11 @@
       <label for="phone">Phone Number:</label>
       <input type="tel" id="phone" name="phone" required>
 
-      <label for="pin">Create a 4-Digit PIN:</label>
-      <input type="password" id="pin" name="pin" pattern="\d{4}" maxlength="4" required>
+      <label for="pin">Create PIN:</label>
+      <input type="password" id="pin" name="pin" minlength="4" maxlength="4" required>
 
       <label for="confirmPin">Confirm PIN:</label>
-      <input type="password" id="confirmPin" name="confirmPin" pattern="\d{4}" maxlength="4" required>
+      <input type="password" id="confirmPin" name="confirmPin" minlength="4" maxlength="4" required>
 
       <label for="idNumber">ID Number:</label>
       <input type="text" id="idNumber" name="idNumber" required>
@@ -28,14 +28,28 @@
       <label for="idPicture">Upload ID Picture:</label>
       <input type="file" id="idPicture" name="idPicture" accept="image/*" required>
 
-      <button type="submit">Signup</button>
+      <button type="submit">Sign Up</button>
     </form>
-    
-    <div class="login-container">
-      <p>Already have an account?</p>
-      <a href="login.html" class="login-button">Login</a>
-    </div>
   </div>
-  <script src="signup.js"></script>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(document.getElementById('signupForm'));
+
+      const response = await fetch('/register', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        alert("Registration successful!");
+        window.location.href = "home.html";
+      } else {
+        alert("Registration failed. Please try again.");
+      }
+    });
+  </script>
 </body>
 </html>

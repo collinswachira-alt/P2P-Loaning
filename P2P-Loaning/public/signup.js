@@ -24,7 +24,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
   
     if (response.ok) {
       alert('Signup successful!');
-      window.location.href = 'regredirect.html'; // Redirect to home page
+      window.location.href = 'regredirect.html'; 
     } else {
       alert('Signup failed. Please try again.');
     }

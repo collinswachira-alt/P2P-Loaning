@@ -1,88 +1,111 @@
+/* Resetting margin and padding */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f0f8ff, #e6e6fa);
+    color: #fff;
+  }
+  
+  .container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    flex-direction: column;
-}
-
-.container {
     text-align: center;
-}
-
-.circle {
-    width: 100px;
-    height: 100px;
-    border: 10px solid #4caf50;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 20px;
+    z-index: 2;
+  }
+  
+  .animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, #3498db, #9b59b6, #e74c3c, #f39c12);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    z-index: 1;
+  }
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .message-box {
     position: relative;
-    animation: pulse 2s infinite;
-}
-
-.tick {
-    width: 60px;
-    height: 60px;
-    background-color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.tick-mark {
-    width: 30px;
-    height: 10px;
-    border: 3px solid #4caf50;
-    border-radius: 3px;
-    transform: rotate(45deg);
-    position: relative;
-}
-
-.tick-mark::before {
-    content: '';
-    width: 10px;
-    height: 30px;
-    background-color: #4caf50;
-    position: absolute;
-    left: 10px;
-    bottom: 0;
-}
-
-h1 {
-    margin-top: 20px;
-    color: #4caf50;
-}
-
-p {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    z-index: 2;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .success-icon {
+    font-size: 3em;
+    animation: bounce 1.5s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  h1 {
+    margin: 15px 0;
+    font-size: 1.8em;
+    color: #f9ca24;
+  }
+  
+  .countdown-container {
     margin-top: 10px;
-    color: #333;
-}
-
-/* Animation for the circle */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(76, 175, 80, 0.7);
-    }
-    50% {
-        transform: scale(1.1);
-        box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 rgba(76, 175, 80, 0.7);
-    }
-}
+  }
+  
+  .countdown {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #e1b12c;
+  }
+  
+  .progress-container {
+    margin-top: 20px;
+  }
+  
+  .progress-container p {
+    font-size: 0.9em;
+    color: #bdc3c7;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #dcdde1;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .progress {
+    height: 100%;
+    width: 0%;
+    background-color: #f9ca24;
+    transition: width 1s linear;
+  }
+  
+  .redirect-message {
+    font-size: 0.85em;
+    color: #95a5a6;
+    margin-top: 20px;
+  }
+  

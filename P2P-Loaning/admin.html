@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - User Registrations</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <h2>Registered Users</h2>
+    <div id="userList"></div>
+  </div>
+
+  <script>
+    async function fetchRegistrations() {
+      const response = await fetch('/get-registrations');
+      const users = await response.json();
+
+      const userListDiv = document.getElementById('userList');
+      userListDiv.innerHTML = users.map(user => `
+        <div class="user-entry">
+          <p><strong>Name:</strong> ${user.name}</p>
+          <p><strong>Phone:</strong> ${user.phone}</p>
+          <p><strong>ID Number:</strong> ${user.idNumber}</p>
+          <p><strong>Date:</strong> ${new Date(user.date).toLocaleString()}</p>
+          ${user.idPicturePath ? `<img src="${user.idPicturePath}" alt="ID Picture" width="100">` : ''}
+          <hr>
+        </div>
+      `).join('');
+    }
+
+    fetchRegistrations();
+  </script>
+</body>
+</html>

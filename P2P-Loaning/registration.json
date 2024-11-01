@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "name": "Teddy Mainap",
+    "phone": "+254 115661943",
+    "pin": "5555",
+    "idNumber": "414111q",
+    "date": "2024-11-01T13:38:01.796Z",
+    "idPicturePath": "assets/1730468281757-169087666.jpg"
+  },
+  {
+    "name": "Jeff Wachira",
+    "phone": "0713922773",
+    "pin": "6660",
+    "idNumber": "4533313",
+    "date": "2024-11-01T13:41:49.235Z",
+    "idPicturePath": "UserIDs/1730468509117-132600184.jpg"
+  }
+]

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Successful</title>
+  <link rel="stylesheet" href="regredirect.css">
+</head>
+<body>
+  <div class="container">
+    <div class="animated-bg"></div>
+    
+    <div class="message-box">
+      <div class="success-icon">🎉</div>
+      <h1>Congratulations XUMMER <span id="userName"></span>!</h1>
+      <p>Your registration was successful.</p>
+      <p>Please give us <strong>1 hour</strong> to verify your identity.</p>
+
+      <div class="countdown-container">
+        <p>Time Remaining:</p>
+        <div class="countdown" id="countdown">60:00</div>
+      </div>
+
+      <div class="progress-container">
+        <p>Verification in Progress...</p>
+        <div class="progress-bar">
+          <div class="progress" id="progress"></div>
+        </div>
+      </div>
+      
+      <p class="redirect-message">Please try to Login after the time specified.</p>
+    </div>
+  </div>
+
+  <script>
+    // Simulated username
+    document.getElementById("userName").innerText = "User";
+
+    // Countdown timer setup
+    let timeRemaining = 60 * 60; // 1 hour in seconds
+    const countdownElement = document.getElementById('countdown');
+    const progressElement = document.getElementById('progress');
+
+    function updateCountdown() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      
+      // Update the progress bar
+      const progressPercentage = ((3600 - timeRemaining) / 3600) * 100;
+      progressElement.style.width = `${progressPercentage}%`;
+
+      // Redirect when time is up
+      if (timeRemaining === 0) {
+        clearInterval(countdown);
+        alert("Verification complete! Redirecting to login.");
+        window.location.href = "login.html";
+      }
+      timeRemaining -= 1;
+    }
+
+    const countdown = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>

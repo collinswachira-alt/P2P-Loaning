@@ -1,69 +1,72 @@
 const express = require('express');
-const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const multer = require('multer');
+
 const app = express();
-const PORT = 8080;
+const PORT = 3000;
 
-// Middleware
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use('/assets', express.static('assets')); // Serve images
-
-app.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html')); // Ensure home.html exists and is correctly referenced
-});
-
-// Multer setup for file uploads
+// Setup multer to store uploaded images in 'assets' folder
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'assets'); // Store images in the assets folder
+    cb(null, 'UserIDs');
   },
   filename: (req, file, cb) => {
-    const name = req.body.name.split(' ')[0]; // Use first name as filename
-    cb(null, `${name}_${Date.now()}_${file.originalname}`);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
   }
 });
 const upload = multer({ storage: storage });
 
-// Signup route
-app.post('/signup', upload.single('idPicture'), (req, res) => {
-  const { name, phone, pin, idNumber, ipAddress, dateTime } = req.body;
-  
-  // Create the registration object
-  const registrationData = {
-    name,
-    phone,
-    pin,
-    idNumber,
-    ipAddress,
-    dateTime,
-    idPicture: req.file.filename // Store the filename of the uploaded ID picture
-  };
-
-  // Store in registration.json
-  fs.readFile('registration.json', (err, data) => {
-    let registrations = [];
-    if (!err) {
-      registrations = JSON.parse(data);
-    }
-    registrations.push(registrationData);
-
-    fs.writeFile('registration.json', JSON.stringify(registrations, null, 2), (err) => {
-      if (err) {
-        return res.status(500).json({ message: 'Failed to save registration data.' });
-      }
-      res.status(200).json({ message: 'Registration successful!' });
-    });
-  });
-});
+app.use(express.static(__dirname));
+app.use(express.json());
 
 // Serve the signup page
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'signup.html'));
 });
 
-// Start the server
+// Handle registration data submission with file upload
+app.post('/register', upload.single('idPicture'), (req, res) => {
+  const { name, phone, pin, idNumber } = req.body;
+  const date = new Date().toISOString();
+  const idPicturePath = req.file ? `UserIDs/${req.file.filename}` : null;
+
+  const userData = { name, phone, pin, idNumber, date, idPicturePath };
+
+  fs.readFile('registration.json', (err, data) => {
+    let users = [];
+    if (!err && data.length > 0) {
+      users = JSON.parse(data);
+    }
+
+    users.push(userData);
+
+    fs.writeFile('registration.json', JSON.stringify(users, null, 2), (writeErr) => {
+      if (writeErr) {
+        res.status(500).send('Error saving registration');
+      } else {
+        res.status(200).send('Registration successful');
+      }
+    });
+  });
+});
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
+app.get('/get-registrations', (req, res) => {
+  fs.readFile('registration.json', (err, data) => {
+    if (err || data.length === 0) {
+      res.status(200).json([]);
+    } else {
+      const users = JSON.parse(data);
+      res.json(users);
+    }
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
