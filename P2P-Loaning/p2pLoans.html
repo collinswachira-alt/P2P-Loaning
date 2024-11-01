@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P2P Loans</title>
-    <link rel="stylesheet" href="p2pLoans.css">
-    <script src="p2pLoans.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2P Loans</title>
+  <link rel="stylesheet" href="p2pLoans.css">
+  <script src="p2pLoans.js" defer></script>
 </head>
 <body>
-    <div class="p2p-container">
-        <header>
-            <h1>P2P Loan Platform</h1>
-        </header>
+  <div class="p2p-loans-container">
+    <header>
+      <h1>P2P Loans Platform</h1>
+      <p>Connect and fund loans with fellow users</p>
+    </header>
 
-        <div class="p2p-content">
-            <section class="loan-section" id="borrow-loan">
-                <h2>Borrow a Loan</h2>
-                <div class="loan-items" id="borrowItems">
-                    <!-- Loan items will be populated here -->
-                </div>
-            </section>
+    <section class="notification">
+      <h3>Recent Notifications</h3>
+      <div id="notificationList" class="notification-list">
+        <!-- Notifications will be populated here -->
+      </div>
+    </section>
 
-            <section class="loan-section" id="offer-loan">
-                <h2>Offer a Loan</h2>
-                <div class="loan-items" id="offerItems">
-                    <!-- Loan items will be populated here -->
-                </div>
-            </section>
+    <div class="loan-sections">
+      <section class="borrow-loan">
+        <h2>Borrow a Loan</h2>
+        <div class="loan-items" id="borrowLoanItems">
+          <!-- Loan items for borrowing will be populated here -->
         </div>
+      </section>
 
-        <div class="notifications" id="notifications">
-            <!-- Notification messages will appear here -->
+      <section class="offer-loan">
+        <h2>Offer a Loan</h2>
+        <div class="loan-items" id="offerLoanItems">
+          <!-- Loan items for offering will be populated here -->
         </div>
+      </section>
     </div>
+  </div>
 </body>
 </html>

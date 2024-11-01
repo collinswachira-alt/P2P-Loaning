@@ -1,97 +1,103 @@
-document.addEventListener('DOMContentLoaded', () => {
-  populateLoanItems();
-  showNotifications();
-});
-
-// Sample Data for Loan Offers and Requests
+// Sample data for loans and notifications
 const loanOffers = [
-  { id: 'LOAN001', name: 'John Doe', amount: 500, duration: '30 days' },
-  { id: 'LOAN002', name: 'Jane Smith', amount: 1000, duration: '45 days' },
-  { id: 'LOAN003', name: 'Emily Johnson', amount: 300, duration: '15 days' },
-  { id: 'LOAN004', name: 'Michael Brown', amount: 800, duration: '60 days' },
-  { id: 'LOAN005', name: 'Sarah Davis', amount: 450, duration: '30 days' },
-  { id: 'LOAN006', name: 'David Wilson', amount: 650, duration: '30 days' },
-  { id: 'LOAN007', name: 'Anna Garcia', amount: 900, duration: '20 days' },
-  { id: 'LOAN008', name: 'Brian Martinez', amount: 750, duration: '50 days' },
-  { id: 'LOAN009', name: 'Samantha Lee', amount: 400, duration: '25 days' },
-  { id: 'LOAN010', name: 'Kevin Thompson', amount: 550, duration: '40 days' },
-  { id: 'LOAN011', name: 'Laura White', amount: 1200, duration: '30 days' },
-  { id: 'LOAN012', name: 'James Harris', amount: 300, duration: '10 days' },
-  { id: 'LOAN013', name: 'Jessica Clark', amount: 850, duration: '35 days' },
+  { id: 'LOAN001', profileImg: '😀', amount: 500, interestRate: 5 },
+  { id: 'LOAN002', profileImg: '😃', amount: 1000, interestRate: 4 },
+  { id: 'LOAN003', profileImg: '😄', amount: 1500, interestRate: 6 },
+  { id: 'LOAN004', profileImg: '😁', amount: 2000, interestRate: 5 },
+  { id: 'LOAN005', profileImg: '😆', amount: 2500, interestRate: 3 },
+  { id: 'LOAN006', profileImg: '😅', amount: 3000, interestRate: 4 },
+  { id: 'LOAN007', profileImg: '😂', amount: 3500, interestRate: 5 },
+  { id: 'LOAN008', profileImg: '🤣', amount: 4000, interestRate: 7 },
+  { id: 'LOAN009', profileImg: '😇', amount: 4500, interestRate: 6 },
+  { id: 'LOAN010', profileImg: '😉', amount: 5000, interestRate: 4 },
+  { id: 'LOAN011', profileImg: '😊', amount: 5500, interestRate: 5 },
+  { id: 'LOAN012', profileImg: '😋', amount: 6000, interestRate: 5 },
+  { id: 'LOAN013', profileImg: '😎', amount: 6500, interestRate: 8 }
 ];
 
 const loanRequests = [
-  { id: 'REQ001', name: 'Liam Taylor', amount: 600, duration: '15 days' },
-  { id: 'REQ002', name: 'Mia Robinson', amount: 300, duration: '20 days' },
-  { id: 'REQ003', name: 'Noah Walker', amount: 500, duration: '30 days' },
-  { id: 'REQ004', name: 'Olivia Young', amount: 450, duration: '25 days' },
-  { id: 'REQ005', name: 'Lucas Hall', amount: 700, duration: '40 days' },
-  { id: 'REQ006', name: 'Isabella Allen', amount: 900, duration: '50 days' },
-  { id: 'REQ007', name: 'Mason Wright', amount: 800, duration: '30 days' },
-  { id: 'REQ008', name: 'Sophia King', amount: 400, duration: '10 days' },
-  { id: 'REQ009', name: 'Ethan Scott', amount: 650, duration: '45 days' },
-  { id: 'REQ010', name: 'Ava Adams', amount: 300, duration: '20 days' },
-  { id: 'REQ011', name: 'James Baker', amount: 1200, duration: '30 days' },
-  { id: 'REQ012', name: 'Charlotte Green', amount: 550, duration: '15 days' },
-  { id: 'REQ013', name: 'Benjamin Nelson', amount: 500, duration: '30 days' },
+  { id: 'REQUEST001', profileImg: '😍', amount: 500, purpose: 'Medical Expenses' },
+  { id: 'REQUEST002', profileImg: '😗', amount: 1000, purpose: 'Education' },
+  { id: 'REQUEST003', profileImg: '😘', amount: 1500, purpose: 'Home Renovation' },
+  { id: 'REQUEST004', profileImg: '😜', amount: 2000, purpose: 'Car Repair' },
+  { id: 'REQUEST005', profileImg: '😝', amount: 2500, purpose: 'Travel Expenses' },
+  { id: 'REQUEST006', profileImg: '😳', amount: 3000, purpose: 'Business Investment' },
+  { id: 'REQUEST007', profileImg: '😬', amount: 3500, purpose: 'Wedding Costs' },
+  { id: 'REQUEST008', profileImg: '😮', amount: 4000, purpose: 'Debt Consolidation' },
+  { id: 'REQUEST009', profileImg: '😯', amount: 4500, purpose: 'Emergency Fund' },
+  { id: 'REQUEST010', profileImg: '😵', amount: 5000, purpose: 'Medical Bills' },
+  { id: 'REQUEST011', profileImg: '🥳', amount: 5500, purpose: 'Family Support' },
+  { id: 'REQUEST012', profileImg: '🥺', amount: 6000, purpose: 'Home Purchase' },
+  { id: 'REQUEST013', profileImg: '🤩', amount: 6500, purpose: 'Vacation' }
 ];
 
-// Populate Loan Items
-function populateLoanItems() {
-  const borrowItemsContainer = document.getElementById('borrowItems');
-  const offerItemsContainer = document.getElementById('offerItems');
+// Function to populate loan items
+function populateLoans() {
+  const borrowLoanItems = document.getElementById('borrowLoanItems');
+  const offerLoanItems = document.getElementById('offerLoanItems');
 
+  // Populate Borrow Loans
   loanRequests.forEach(request => {
-      const item = document.createElement('div');
-      item.className = 'loan-item';
-      item.innerHTML = `
-          <div class="profile-icon">${request.name.charAt(0)}</div>
-          <h3>${request.name}</h3>
-          <p>Loan ID: ${request.id}</p>
-          <p>Amount: $${request.amount}</p>
-          <p>Duration: ${request.duration}</p>
-      `;
-      borrowItemsContainer.appendChild(item);
+    const item = document.createElement('div');
+    item.className = 'loan-item';
+    item.innerHTML = `
+      <div class="details">
+        <span class="emoji">${request.profileImg}</span>
+        <h4>Loan ID: ${request.id} - Amount: $${request.amount}</h4>
+      </div>
+      <h4>Purpose: ${request.purpose}</h4>
+      <button onclick="redirectToSuccess()">Select</button>
+    `;
+    borrowLoanItems.appendChild(item);
   });
 
+  // Populate Offer Loans
   loanOffers.forEach(offer => {
-      const item = document.createElement('div');
-      item.className = 'loan-item';
-      item.innerHTML = `
-          <div class="profile-icon">${offer.name.charAt(0)}</div>
-          <h3>${offer.name}</h3>
-          <p>Loan ID: ${offer.id}</p>
-          <p>Amount: $${offer.amount}</p>
-          <p>Duration: ${offer.duration}</p>
-      `;
-      offerItemsContainer.appendChild(item);
+    const item = document.createElement('div');
+    item.className = 'loan-item';
+    item.innerHTML = `
+      <div class="details">
+        <span class="emoji">${offer.profileImg}</span>
+        <h4>Loan ID: ${offer.id} - Amount: $${offer.amount} - Interest Rate: ${offer.interestRate}%</h4>
+      </div>
+      <button onclick="redirectToSuccess()">Select</button>
+    `;
+    offerLoanItems.appendChild(item);
   });
 }
 
-// Show Notifications
+// Function to populate notifications and show them one by one
 function showNotifications() {
-  const notificationsContainer = document.getElementById('notifications');
   const notifications = [
-      "John Doe has offered a loan of $500.",
-      "Mia Robinson has requested a loan of $300.",
-      "James Harris has offered a loan of $1200.",
-      "Olivia Young has requested a loan of $450."
+    'John Doe offered a loan of $2000.',
+    'Jane Smith requested a loan of $1500.',
+    'Alice Johnson offered a loan of $1000.',
+    'Bob Brown requested a loan of $2500.',
+    'Emily White offered a loan of $3000.'
   ];
 
-  notifications.forEach((msg, index) => {
-      const notification = document.createElement('div');
-      notification.className = 'notification';
-      notification.innerText = msg;
-      notificationsContainer.appendChild(notification);
-      
-      // Auto-dismiss notification after 3 seconds
-      setTimeout(() => {
-          notification.style.opacity = '0';
-          setTimeout(() => {
-              notificationsContainer.removeChild(notification);
-          }, 300);
-      }, 3000 * (index + 1)); // stagger notifications
-  });
+  notifications.forEach((notification, index) => {
+    setTimeout(() => {
+      const notificationDiv = document.createElement('div');
+      notificationDiv.className = 'notification-popup';
+      notificationDiv.innerText = notification;
+      document.body.appendChild(notificationDiv);
 
-  notificationsContainer.style.display = 'block';
+      // Remove the notification after a few seconds
+      setTimeout(() => {
+        notificationDiv.remove();
+      }, 3000);
+    }, index * 4000); // Show each notification every 4 seconds
+  });
 }
+
+// Redirect function to successful page
+function redirectToSuccess() {
+  window.location.href = 'successful.html';
+}
+
+// Initialize the page
+window.onload = () => {
+  populateLoans();
+  showNotifications();
+};
