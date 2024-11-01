@@ -1,12 +1,28 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll(".slide");
-
-function showSlides() {
-  slides.forEach((slide, index) => {
-    slide.style.opacity = index === currentSlide ? "1" : "0";
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+  
+    // Capture the form data
+    const formData = new FormData(this);
+  
+    // Get current date and time
+    const dateTime = new Date().toLocaleString();
+  
+    // Fetch IP address
+    const ipResponse = await fetch("https://api.ipify.org?format=json");
+    const ipData = await ipResponse.json();
+    formData.append("ipAddress", ipData.ip);
+    formData.append("dateTime", dateTime);
+  
+    // Send form data to server
+    fetch("/register", {
+      method: "POST",
+      body: formData
+    }).then(response => {
+      if (response.ok) {
+        window.location.href = "wallet.html";
+      } else {
+        alert("Error in registration. Try again.");
+      }
+    });
   });
-  currentSlide = (currentSlide + 1) % slides.length;
-}
-
-setInterval(showSlides, 3000); // Change image every 3 seconds
-showSlides();
+  

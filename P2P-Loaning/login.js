@@ -6,7 +6,7 @@ async function verifyCredentials(accountID, pin) {
       user => user.accountID === accountID && user.pin === pin
     );
   
-    return user ? user : null; // Return the entire user object if found
+    return user ? user : null; 
   }
   
   document.getElementById("loginForm").addEventListener("submit", async (event) => {
@@ -19,9 +19,9 @@ async function verifyCredentials(accountID, pin) {
     const user = await verifyCredentials(accountID, pin);
   
     if (user) {
-      // Store user details in localStorage
+    
       localStorage.setItem("currentUser", JSON.stringify(user));
-      // Redirect to wallet.html
+    
       window.location.href = "wallet.html";
     } else {
       errorMessage.textContent = "Invalid Account ID or PIN. Please try again.";

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Options</title>
+    <link rel="stylesheet" href="loan.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="loan-container">
+        <header class="header">
+            <h2>Loan Options</h2>
+            <button id="logoutButton" class="logout-button">Log Out</button>
+        </header>
+
+        <section class="updates">
+            <h3>Loan Updates</h3>
+            <div class="scrolling-updates">
+                <div class="update-item">New P2P Loan options available with lower interest rates!</div>
+                <div class="update-item">Bank Loan application now approved within 24 hours!</div>
+                <div class="update-item">Check out our latest promotional offers on loans!</div>
+            </div>
+        </section>
+
+        <section class="loan-options">
+            <h3>Select Your Loan Type</h3>
+            <button class="option-button" onclick="location.href='loan-details.html?type=p2p'">P2P Loans</button>
+            <button class="option-button" onclick="location.href='loan-details.html?type=bank'">Bank Loans</button>
+        </section>
+
+        <section class="loan-history">
+            <h3>Your Loan History</h3>
+            <table id="loanHistoryTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Loan Type</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="loanHistoryList"></tbody>
+            </table>
+        </section>
+
+        <section class="image-carousel">
+            <h3>Our Partners</h3>
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="partner1.jpg" alt="Partner 1">
+                    <img src="partner2.jpg" alt="Partner 2">
+                    <img src="partner3.jpg" alt="Partner 3">
+                    <img src="partner4.jpg" alt="Partner 4">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="loan.js"></script>
+</body>
+</html>
