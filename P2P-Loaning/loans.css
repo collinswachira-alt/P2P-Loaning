@@ -1,0 +1,117 @@
+/* Global Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #d3cce3, #e9e4f0);
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0 10px;
+}
+
+.loans-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+header {
+  background: #6a1b9a;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+header h2 span {
+  font-weight: normal;
+}
+
+.loan-summary {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.summary-item p {
+  font-size: 0.9rem;
+  color: #6a1b9a;
+}
+
+.summary-item h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.loan-history {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.loan-history h3 {
+  color: #6a1b9a;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.loan-actions button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #6a1b9a;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loan-actions button:hover {
+  background-color: #8e24aa;
+}
+
+.recent-transactions {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.recent-transactions h3 {
+  color: #6a1b9a;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+#transactionList {
+  list-style: none;
+  padding-left: 0;
+}
+
+#transactionList li {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+#atr {
+  background-color: #d3cce3;
+}

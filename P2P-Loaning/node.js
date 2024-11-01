@@ -8,7 +8,6 @@ const PORT = 5050;
 
 app.use(express.static('public'));
 
-// Multer setup for file uploads
 const storage = multer.diskStorage({
   destination: './assets/',
   filename: (req, file, cb) => {
@@ -17,7 +16,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// POST route to handle registration
+
 app.post('/register', upload.single('idImage'), (req, res) => {
   const { name, phone, pin, idNumber, ip, dateTime } = req.body;
   
@@ -30,10 +29,9 @@ app.post('/register', upload.single('idImage'), (req, res) => {
     dateTime
   };
 
-  // Read existing data and add new user
   fs.readFile('registration.json', 'utf8', (err, data) => {
     if (err && err.code === 'ENOENT') {
-      // If file doesn't exist, initialize with empty array
+    
       console.log("File not found. Initializing new file.");
       data = '[]';
     } else if (err) {
@@ -51,7 +49,7 @@ app.post('/register', upload.single('idImage'), (req, res) => {
 
     users.push(newUser);
 
-    // Write updated data back to file
+    
     fs.writeFile('registration.json', JSON.stringify(users, null, 2), (writeErr) => {
       if (writeErr) {
         console.error("Error writing file:", writeErr);

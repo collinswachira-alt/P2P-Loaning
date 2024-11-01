@@ -1,18 +1,34 @@
 [
   {
-    "name": "Teddy Mainap",
+    "name": "Stanley Mugambi",
+    "phone": "0115668957",
+    "pin": "8888",
+    "idNumber": "21212121",
+    "date": "2024-11-01T17:42:17.629Z",
+    "idPicturePath": "UserIDs/1730482937609-847191887.jpeg"
+  },
+  {
+    "name": "Faith Ndege. ",
+    "phone": "0713922773",
+    "pin": "9999",
+    "idNumber": "66226",
+    "date": "2024-11-01T17:44:59.152Z",
+    "idPicturePath": "UserIDs/1730483099045-985865890.jpg"
+  },
+  {
+    "name": "Bubbly bubbly ",
     "phone": "+254 115661943",
-    "pin": "5555",
-    "idNumber": "414111q",
-    "date": "2024-11-01T13:38:01.796Z",
-    "idPicturePath": "assets/1730468281757-169087666.jpg"
+    "pin": "5432",
+    "idNumber": "678396jj",
+    "date": "2024-11-01T17:46:33.377Z",
+    "idPicturePath": "UserIDs/1730483193225-643483102.jpg"
   },
   {
     "name": "Jeff Wachira",
     "phone": "0713922773",
-    "pin": "6660",
-    "idNumber": "4533313",
-    "date": "2024-11-01T13:41:49.235Z",
-    "idPicturePath": "UserIDs/1730468509117-132600184.jpg"
+    "pin": "t665",
+    "idNumber": "554322",
+    "date": "2024-11-01T18:32:25.629Z",
+    "idPicturePath": "UserIDs/1730485902437-398866344.jpg"
   }
 ]

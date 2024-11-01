@@ -75,3 +75,17 @@ button:hover {
 .login-button:hover {
   text-decoration: underline;
 }
+.signup-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signup-button {
+  color: #ff6f61;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-button:hover {
+  text-decoration: underline;
+}

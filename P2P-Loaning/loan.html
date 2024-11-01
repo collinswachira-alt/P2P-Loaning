@@ -3,54 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loan History</title>
-  <link rel="stylesheet" href="loan.css">
+  <title>Loans</title>
+  <link rel="stylesheet" href="loans.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="loans-container">
-    <h2>Your Loan History</h2>
+    <header>
+      <h2>Account ID: SE218-0129/2022<span id="accountID"></span></h2>
+    </header>
+    
+    <section class="loan-summary">
+      <div class="summary-item">
+        <p>Loan Borrowed</p>
+        <h3>Ksh12,500</h3>
+      </div>
+      <div class="summary-item">
+        <p>Total Paid</p>
+        <h3>Ksh8,000</h3>
+      </div>
+      <div class="summary-item">
+        <p>Amount Due</p>
+        <h3>Ksh4,500</h3>
+      </div>
+    </section>
 
-    <div class="loan-history">
-      <table>
-        <thead>
-          <tr>
-            <th>Loan ID</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th>Date Applied</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Example Loan History Entries -->
-          <tr>
-            <td>LN001</td>
-            <td>$1000</td>
-            <td>Approved</td>
-            <td>2024-10-01</td>
-          </tr>
-          <tr>
-            <td>LN002</td>
-            <td>$500</td>
-            <td>Pending</td>
-            <td>2024-10-10</td>
-          </tr>
-          <tr>
-            <td>LN003</td>
-            <td>$2000</td>
-            <td>Repaid</td>
-            <td>2024-09-20</td>
-          </tr>
-          <!-- More entries can be added dynamically -->
-        </tbody>
-      </table>
-    </div>
+    <section class="loan-history">
+      <h3>Loan History</h3>
+      <canvas id="loanChart"></canvas>
+    </section>
 
-    <div class="button-container">
-      <button id="applyLoanButton">Apply for Loan</button>
-      <button id="repaymentButton">Loan Repayment</button>
-    </div>
+    <section class="loan-actions">
+      <button onclick="requestLoan()">Request Loan</button>
+      <button onclick="payLoan()">Loan Payment</button>
+      <button onclick="window.location.href='p2pLoans.html'">Explore P2P Loans</button>
+    </section>
+
+    <section class="loan-actions" id="atr">
+      <button onclick="window.location.href='transactions.html'">Recent Transactions.</button>
+    </section>
   </div>
 
-  <script src="loan.js"></script>
+  <script src="loans.js"></script>
 </body>
 </html>

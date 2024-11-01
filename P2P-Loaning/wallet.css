@@ -93,12 +93,12 @@
   }
   
   .action-button i {
-    margin-right: 8px; /* Space between icon and text */
+    margin-right: 8px; 
   }
   
   .action-button:hover {
     background-color: #0056b3;
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    transform: scale(1.05); 
   }
   
   .transactions {
@@ -133,10 +133,9 @@
   }
   
   tr:hover {
-    background-color: #f1f1f1; /* Highlight on hover */
+    background-color: #f1f1f1; 
   }
   
-  /* Responsive Design */
   @media (max-width: 600px) {
     .wallet-container {
       padding: 15px;

@@ -21,12 +21,10 @@ const upload = multer({ storage: storage });
 app.use(express.static(__dirname));
 app.use(express.json());
 
-// Serve the signup page
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'signup.html'));
 });
 
-// Handle registration data submission with file upload
 app.post('/register', upload.single('idPicture'), (req, res) => {
   const { name, phone, pin, idNumber } = req.body;
   const date = new Date().toISOString();
