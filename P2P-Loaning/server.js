@@ -1,51 +1,69 @@
-const express = require("express");
-const fs = require("fs");
-const multer = require("multer");
-const path = require("path");
-
+const express = require('express');
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 const app = express();
-app.use(express.static("public"));
+const PORT = 8080;
 
-// Set up Multer for file uploads
-const storage = multer.diskStorage({
-  destination: "./assets",
-  filename: (req, file, cb) => {
-    const firstName = req.body.idNumber;
-    const ext = path.extname(file.originalname);
-    cb(null, `${firstName}${ext}`);
-  }
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use('/assets', express.static('assets')); // Serve images
+
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html')); // Ensure home.html exists and is correctly referenced
 });
 
-const upload = multer({ storage });
-
-// Route for handling registration
-app.post("/register", upload.single("idImage"), (req, res) => {
-  const { idNumber, phoneNumber, pin, confirmPin, ipAddress, dateTime } = req.body;
-
-  if (pin !== confirmPin) {
-    return res.status(400).send("PINs do not match");
+// Multer setup for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'assets'); // Store images in the assets folder
+  },
+  filename: (req, file, cb) => {
+    const name = req.body.name.split(' ')[0]; // Use first name as filename
+    cb(null, `${name}_${Date.now()}_${file.originalname}`);
   }
+});
+const upload = multer({ storage: storage });
 
-  // Prepare user data
-  const userData = {
-    idNumber,
-    phoneNumber,
+// Signup route
+app.post('/signup', upload.single('idPicture'), (req, res) => {
+  const { name, phone, pin, idNumber, ipAddress, dateTime } = req.body;
+  
+  // Create the registration object
+  const registrationData = {
+    name,
+    phone,
     pin,
+    idNumber,
     ipAddress,
-    dateTime
+    dateTime,
+    idPicture: req.file.filename // Store the filename of the uploaded ID picture
   };
 
-  // Save data to registration.json
-  fs.readFile("registration.json", (err, data) => {
-    const registrations = data ? JSON.parse(data) : [];
-    registrations.push(userData);
-    fs.writeFile("registration.json", JSON.stringify(registrations, null, 2), (err) => {
-      if (err) return res.status(500).send("Error saving registration data");
-      res.status(200).send("Registration successful");
+  // Store in registration.json
+  fs.readFile('registration.json', (err, data) => {
+    let registrations = [];
+    if (!err) {
+      registrations = JSON.parse(data);
+    }
+    registrations.push(registrationData);
+
+    fs.writeFile('registration.json', JSON.stringify(registrations, null, 2), (err) => {
+      if (err) {
+        return res.status(500).json({ message: 'Failed to save registration data.' });
+      }
+      res.status(200).json({ message: 'Registration successful!' });
     });
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:5500");
+// Serve the signup page
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, 'signup.html'));
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

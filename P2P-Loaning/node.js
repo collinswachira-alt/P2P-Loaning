@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = 5500; // Adjust port as needed
+const PORT = 5050; 
 
 app.use(express.static('public'));
 
@@ -63,5 +63,4 @@ app.post('/register', upload.single('idImage'), (req, res) => {
   });
 });
 
-// Start server
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

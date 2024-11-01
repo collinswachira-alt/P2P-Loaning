@@ -1,45 +1,32 @@
-document.getElementById('signupForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+document.getElementById('signupForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent form submission
   
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const pin = document.getElementById('pin').value;
-    const confirmPin = document.getElementById('confirmPin').value;
-    const idNumber = document.getElementById('idNumber').value;
-    const idImage = document.getElementById('idImage').files[0];
+    const formData = new FormData(this);
+    
+    // Capture IP address
+    const ipResponse = await fetch('https://api.ipify.org?format=json');
+    const ipData = await ipResponse.json();
+    const userIP = ipData.ip;
   
-    // PIN validation
-    if (pin !== confirmPin) {
-      document.getElementById('statusMessage').textContent = "PINs do not match!";
-      return;
-    }
+    // Get current date and time
+    const now = new Date();
+    const dateTime = now.toISOString();
   
-    // Get IP address and current date/time
-    const response = await fetch('https://api.ipify.org?format=json');
-    const data = await response.json();
-    const ip = data.ip;
-    const dateTime = new Date().toLocaleString();
-  
-    // Prepare form data to send to server
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('phone', phone);
-    formData.append('pin', pin);
-    formData.append('idNumber', idNumber);
-    formData.append('ip', ip);
+    // Append IP address and timestamp to the form data
+    formData.append('ipAddress', userIP);
     formData.append('dateTime', dateTime);
-    formData.append('idImage', idImage);
   
     // Send data to the server
-    const res = await fetch('/register', {
+    const response = await fetch('/signup', {
       method: 'POST',
       body: formData
     });
   
-    if (res.ok) {
-      window.location.href = "welcome.html";
+    if (response.ok) {
+      alert('Signup successful!');
+      window.location.href = 'regredirect.html'; // Redirect to home page
     } else {
-      document.getElementById('statusMessage').textContent = "Registration failed. Try again!";
+      alert('Signup failed. Please try again.');
     }
   });
   

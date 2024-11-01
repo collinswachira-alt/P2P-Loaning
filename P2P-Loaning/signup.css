@@ -1,36 +1,44 @@
+/* Global Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
-  color: #fff;
 }
 
 .signup-container {
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
   background: #fff;
-  color: #333;
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 500px;
 }
 
-.signup-container h2 {
+h2 {
+  margin-bottom: 20px;
+  color: #ff6f61;
   text-align: center;
-  color: #4a00e0;
 }
 
-.signup-container label {
-  font-weight: bold;
-  margin: 10px 0 5px;
+label {
   display: block;
+  margin-bottom: 5px;
 }
 
-.signup-container input {
+input[type="text"],
+input[type="tel"],
+input[type="password"],
+input[type="file"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -38,24 +46,32 @@ body {
   border-radius: 5px;
 }
 
-.signup-container button {
+button {
   width: 100%;
   padding: 10px;
-  background: #4a00e0;
-  color: #fff;
+  background-color: #ff6f61;
+  color: white;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
 }
 
-.signup-container button:hover {
-  background: #6a00e0;
+button:hover {
+  background-color: #ff3e30;
 }
 
-#statusMessage {
-  color: red;
+.login-container {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 20px;
+}
+
+.login-button {
+  color: #ff6f61;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-button:hover {
+  text-decoration: underline;
 }
