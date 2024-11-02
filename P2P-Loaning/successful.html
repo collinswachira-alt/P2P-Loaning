@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Request Successful</title>
+  <link rel="stylesheet" href="successful.css">
+</head>
+<body>
+
+  <div class="success-container">
+    <div class="animated-check">
+      <svg viewBox="0 0 52 52">
+        <circle class="circle" cx="26" cy="26" r="25" fill="none"></circle>
+        <path class="check" fill="none" d="M14 27l7 7 16-16"></path>
+      </svg>
+    </div>
+    
+    <h1>Loan Request Successful!!!</h1>
+    <p>Thank you for using our P2P loan platform. Your loan request was successful!</p>
+    
+    <div class="loan-details">
+      <h2>Loan Details:</h2>
+      <p><strong>Loan ID:</strong> <span id="loanID"></span></p>
+      <p><strong>Amount:</strong> $<span id="loanAmount"></span></p>
+      <p><strong>Purpose:</strong> <span id="loanPurpose"></span></p>
+      <p><strong>Interest Rate:</strong> <span id="loanInterest"></span></p>
+    </div>
+    
+    <button onclick="returnToLoans()">Return to Loans</button>
+  </div>
+
+  <script src="successful.js"></script>
+</body>
+</html>

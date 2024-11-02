@@ -1,34 +1,20 @@
-// Sample data for loans and notifications
+// Sample data for loans with emojis as profile icons
 const loanOffers = [
-  { id: 'LOAN001', profileImg: '😀', amount: 500, interestRate: 5 },
-  { id: 'LOAN002', profileImg: '😃', amount: 1000, interestRate: 4 },
-  { id: 'LOAN003', profileImg: '😄', amount: 1500, interestRate: 6 },
-  { id: 'LOAN004', profileImg: '😁', amount: 2000, interestRate: 5 },
-  { id: 'LOAN005', profileImg: '😆', amount: 2500, interestRate: 3 },
-  { id: 'LOAN006', profileImg: '😅', amount: 3000, interestRate: 4 },
-  { id: 'LOAN007', profileImg: '😂', amount: 3500, interestRate: 5 },
-  { id: 'LOAN008', profileImg: '🤣', amount: 4000, interestRate: 7 },
-  { id: 'LOAN009', profileImg: '😇', amount: 4500, interestRate: 6 },
-  { id: 'LOAN010', profileImg: '😉', amount: 5000, interestRate: 4 },
-  { id: 'LOAN011', profileImg: '😊', amount: 5500, interestRate: 5 },
-  { id: 'LOAN012', profileImg: '😋', amount: 6000, interestRate: 5 },
-  { id: 'LOAN013', profileImg: '😎', amount: 6500, interestRate: 8 }
+  { id: 'LOAN001', profileImg: '💰', amount: 500, interestRate: 5 },
+  { id: 'LOAN002', profileImg: '🤑', amount: 1000, interestRate: 4 },
+  { id: 'LOAN003', profileImg: '💸', amount: 1500, interestRate: 6 },
+  { id: 'LOAN004', profileImg: '👛', amount: 2000, interestRate: 5 },
+  { id: 'LOAN005', profileImg: '🏦', amount: 2500, interestRate: 3 },
+  { id: 'LOAN006', profileImg: '💳', amount: 3000, interestRate: 4 }
 ];
 
 const loanRequests = [
-  { id: 'REQUEST001', profileImg: '😍', amount: 500, purpose: 'Medical Expenses' },
-  { id: 'REQUEST002', profileImg: '😗', amount: 1000, purpose: 'Education' },
-  { id: 'REQUEST003', profileImg: '😘', amount: 1500, purpose: 'Home Renovation' },
-  { id: 'REQUEST004', profileImg: '😜', amount: 2000, purpose: 'Car Repair' },
-  { id: 'REQUEST005', profileImg: '😝', amount: 2500, purpose: 'Travel Expenses' },
-  { id: 'REQUEST006', profileImg: '😳', amount: 3000, purpose: 'Business Investment' },
-  { id: 'REQUEST007', profileImg: '😬', amount: 3500, purpose: 'Wedding Costs' },
-  { id: 'REQUEST008', profileImg: '😮', amount: 4000, purpose: 'Debt Consolidation' },
-  { id: 'REQUEST009', profileImg: '😯', amount: 4500, purpose: 'Emergency Fund' },
-  { id: 'REQUEST010', profileImg: '😵', amount: 5000, purpose: 'Medical Bills' },
-  { id: 'REQUEST011', profileImg: '🥳', amount: 5500, purpose: 'Family Support' },
-  { id: 'REQUEST012', profileImg: '🥺', amount: 6000, purpose: 'Home Purchase' },
-  { id: 'REQUEST013', profileImg: '🤩', amount: 6500, purpose: 'Vacation' }
+  { id: 'REQUEST001', profileImg: '🧑‍💼', amount: 500, purpose: 'Medical Expenses' },
+  { id: 'REQUEST002', profileImg: '👩‍🎓', amount: 1000, purpose: 'Education' },
+  { id: 'REQUEST003', profileImg: '👨‍🔧', amount: 1500, purpose: 'Car Repair' },
+  { id: 'REQUEST004', profileImg: '👨‍⚕️', amount: 2000, purpose: 'Medical Bills' },
+  { id: 'REQUEST005', profileImg: '👩‍💼', amount: 2500, purpose: 'Business Investment' },
+  { id: 'REQUEST006', profileImg: '🧑‍🌾', amount: 3000, purpose: 'Home Renovation' }
 ];
 
 // Function to populate loan items
@@ -43,10 +29,10 @@ function populateLoans() {
     item.innerHTML = `
       <div class="details">
         <span class="emoji">${request.profileImg}</span>
-        <h4>Loan ID: ${request.id} - Amount: $${request.amount}</h4>
+        <h4>Loan ID: ${request.id} - Amount: Ksh ${request.amount}</h4>
       </div>
-      <h4>Purpose: ${request.purpose}</h4>
-      <button onclick="redirectToSuccess()">Select</button>
+      <p>Purpose: ${request.purpose}</p>
+      <button onclick="window.location.href='successful.html'">Select</button>
     `;
     borrowLoanItems.appendChild(item);
   });
@@ -58,42 +44,51 @@ function populateLoans() {
     item.innerHTML = `
       <div class="details">
         <span class="emoji">${offer.profileImg}</span>
-        <h4>Loan ID: ${offer.id} - Amount: $${offer.amount} - Interest Rate: ${offer.interestRate}%</h4>
+        <h4>Loan ID: ${offer.id} - Amount: Ksh ${offer.amount} - Interest Rate: ${offer.interestRate}%</h4>
       </div>
-      <button onclick="redirectToSuccess()">Select</button>
+      <button onclick="window.location.href='successful.html'">Select</button>
     `;
     offerLoanItems.appendChild(item);
   });
 }
 
-// Function to populate notifications and show them one by one
+// Notifications data
+const notifications = [
+  '🤑 John Doe offered a loan of Ksh 2000.',
+  '💰 Jane Smith requested a loan of Ksh 1500.',
+  '👛 Alice Johnson offered a loan of Ksh 1000.',
+  '💳 Bob Brown requested a loan of Ksh 2500.',
+  '🏦 Emily White offered a loan of Ksh 3000.'
+];
+
+// Function to show notifications one by one
 function showNotifications() {
-  const notifications = [
-    'John Doe offered a loan of $2000.',
-    'Jane Smith requested a loan of $1500.',
-    'Alice Johnson offered a loan of $1000.',
-    'Bob Brown requested a loan of $2500.',
-    'Emily White offered a loan of $3000.'
-  ];
+  const notificationList = document.createElement('div');
+  notificationList.id = 'notificationList';
+  document.body.appendChild(notificationList);
+  let currentNotificationIndex = 0;
 
-  notifications.forEach((notification, index) => {
-    setTimeout(() => {
-      const notificationDiv = document.createElement('div');
-      notificationDiv.className = 'notification-popup';
-      notificationDiv.innerText = notification;
-      document.body.appendChild(notificationDiv);
+  setInterval(() => {
+    if (currentNotificationIndex < notifications.length) {
+      const notificationItem = document.createElement('div');
+      notificationItem.className = 'notification-item';
+      notificationItem.innerText = notifications[currentNotificationIndex];
 
-      // Remove the notification after a few seconds
+      notificationList.appendChild(notificationItem);
+
+      // Fade out after 3 seconds
       setTimeout(() => {
-        notificationDiv.remove();
+        notificationItem.classList.add('fade-out');
+        setTimeout(() => {
+          notificationList.removeChild(notificationItem);
+        }, 1000); // Wait for fade-out to complete before removing
       }, 3000);
-    }, index * 4000); // Show each notification every 4 seconds
-  });
-}
 
-// Redirect function to successful page
-function redirectToSuccess() {
-  window.location.href = 'successful.html';
+      currentNotificationIndex++;
+    } else {
+      currentNotificationIndex = 0; // Restart the notifications loop
+    }
+  }, 4000); // Display a new notification every 4 seconds
 }
 
 // Initialize the page
