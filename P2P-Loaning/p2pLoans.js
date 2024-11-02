@@ -1,4 +1,3 @@
-// Sample data for loans with emojis as profile icons
 const loanOffers = [
   { id: 'LOAN001', profileImg: '💰', amount: 500, interestRate: 5 },
   { id: 'LOAN002', profileImg: '🤑', amount: 1000, interestRate: 4 },
@@ -9,20 +8,24 @@ const loanOffers = [
 ];
 
 const loanRequests = [
-  { id: 'REQUEST001', profileImg: '🧑‍💼', amount: 500, purpose: 'Medical Expenses' },
+  { id: 'REQUEST001', profileImg: '🧑‍💼', amount: 500, purpose: 'Medical Loans' },
   { id: 'REQUEST002', profileImg: '👩‍🎓', amount: 1000, purpose: 'Education' },
-  { id: 'REQUEST003', profileImg: '👨‍🔧', amount: 1500, purpose: 'Car Repair' },
-  { id: 'REQUEST004', profileImg: '👨‍⚕️', amount: 2000, purpose: 'Medical Bills' },
-  { id: 'REQUEST005', profileImg: '👩‍💼', amount: 2500, purpose: 'Business Investment' },
-  { id: 'REQUEST006', profileImg: '🧑‍🌾', amount: 3000, purpose: 'Home Renovation' }
+  { id: 'REQUEST003', profileImg: '👨‍🔧', amount: 1500, purpose: 'Other' },
+  { id: 'REQUEST004', profileImg: '👨‍⚕️', amount: 2000, purpose: 'Medical Loans' },
+  { id: 'REQUEST005', profileImg: '👩‍💼', amount: 2500, purpose: 'Repair and Maintanance' },
+  { id: 'REQUEST006', profileImg: '🧑‍🌾', amount: 3000, purpose: 'Other' },
+  { id: 'REQUEST001', profileImg: '🧑‍💼', amount: 500, purpose: 'Medical Loans' },
+  { id: 'REQUEST002', profileImg: '👩‍🎓', amount: 1000, purpose: 'Education' },
+  { id: 'REQUEST003', profileImg: '👨‍🔧', amount: 1500, purpose: 'Other' },
+  { id: 'REQUEST004', profileImg: '👨‍⚕️', amount: 2000, purpose: 'Medical Loans' },
+  { id: 'REQUEST005', profileImg: '👩‍💼', amount: 2500, purpose: 'Repair and Maintanance' },
+  { id: 'REQUEST006', profileImg: '🧑‍🌾', amount: 3000, purpose: 'Other' }
 ];
 
-// Function to populate loan items
 function populateLoans() {
   const borrowLoanItems = document.getElementById('borrowLoanItems');
   const offerLoanItems = document.getElementById('offerLoanItems');
 
-  // Populate Borrow Loans
   loanRequests.forEach(request => {
     const item = document.createElement('div');
     item.className = 'loan-item';
@@ -37,7 +40,6 @@ function populateLoans() {
     borrowLoanItems.appendChild(item);
   });
 
-  // Populate Offer Loans
   loanOffers.forEach(offer => {
     const item = document.createElement('div');
     item.className = 'loan-item';
@@ -52,16 +54,23 @@ function populateLoans() {
   });
 }
 
-// Notifications data
 const notifications = [
   '🤑 John Doe offered a loan of Ksh 2000.',
+  '💰 Jane Smith requested a loan of Ksh 1500.',
+  '👛 Alice Johnson offered a loan of Ksh 1000.',
+  '💳 Bob Brown requested a loan of Ksh 2500.',
+  '🏦 Emily White offered a loan of Ksh 3000.',
+  '🤑 John Doe offered a loan of Ksh 2000.',
+  '💰 Jane Smith requested a loan of Ksh 1500.',
+  '👛 Alice Johnson offered a loan of Ksh 1000.',
+  '💳 Bob Brown requested a loan of Ksh 2500.',
+  '🏦 Emily White offered a loan of Ksh 3000.', 
   '💰 Jane Smith requested a loan of Ksh 1500.',
   '👛 Alice Johnson offered a loan of Ksh 1000.',
   '💳 Bob Brown requested a loan of Ksh 2500.',
   '🏦 Emily White offered a loan of Ksh 3000.'
 ];
 
-// Function to show notifications one by one
 function showNotifications() {
   const notificationList = document.createElement('div');
   notificationList.id = 'notificationList';
@@ -76,22 +85,21 @@ function showNotifications() {
 
       notificationList.appendChild(notificationItem);
 
-      // Fade out after 3 seconds
       setTimeout(() => {
         notificationItem.classList.add('fade-out');
         setTimeout(() => {
           notificationList.removeChild(notificationItem);
-        }, 1000); // Wait for fade-out to complete before removing
+        }, 1000); 
       }, 3000);
 
       currentNotificationIndex++;
     } else {
-      currentNotificationIndex = 0; // Restart the notifications loop
+      currentNotificationIndex = 0; 
     }
-  }, 4000); // Display a new notification every 4 seconds
+  }, 4000); 
 }
 
-// Initialize the page
+
 window.onload = () => {
   populateLoans();
   showNotifications();
